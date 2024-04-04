@@ -33,8 +33,22 @@ public class ExCubePlayer : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)      //충돌이 되었을때
     {
-        //Debug.Log(collision.gameObject.name);               
-        Point = 0;
-        gameObject.transform.position = Vector3.zero;       //플레이어를 원점으로 이동시킨다.
+        Debug.Log(collision.gameObject.tag);
+        if(collision.gameObject.tag == "Pipe")
+        {
+            Point = 0;
+            gameObject.transform.position = Vector3.zero;       //플레이어를 원점으로 이동시킨다.
+        }
+        
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Items")
+        {
+            Point += 10;
+            Destroy(other.gameObject);
+        }
     }
 }
+
+    
